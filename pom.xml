@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>br.com.lucasromagnoli</groupId>
+    <artifactId>flatland</artifactId>
+    <version>1.0.0.RC1-SNAPSHOT</version>
+    <modules>
+        <module>flatland-domain</module>
+        <module>flatland-web</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <name>Flatland - [Parent]</name>
+    <description>Archetype to anothers projects</description>
+    <organization>
+        <name>Lucas Ramos Romagnoli</name>
+        <url>https://www.github.com/lucasromagnoli</url>
+    </organization>
+
+    <properties>
+        <!-- Versão do Plugin Maven Compiler -->
+        <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
+
+        <!-- Versão do compilador Java -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- Encoding padrão para o Maven Compiler Plugin -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Versão do Flatland -->
+        <br.com.lucasromagnoli.flatland.version>1.0.0.RC1-SNAPSHOT</br.com.lucasromagnoli.flatland.version>
+
+        <!-- Versão do Underpinning -->
+        <br.com.lucasromagnoli.javaee.underpinning.version>1.0.0.RC1-SNAPSHOT</br.com.lucasromagnoli.javaee.underpinning.version>
+    </properties>
+</project>
