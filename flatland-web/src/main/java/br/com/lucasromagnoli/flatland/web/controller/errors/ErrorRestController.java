@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ErrorRestController {
 
     /*
-     * TODO: Após incluir as configurações e classe de support: AA
+     * TODO: Após incluir as configurações e classe de support:
      *  Atualizar as mensagens de retorno para buscarem dinamicamente do .properties.
      */
 
