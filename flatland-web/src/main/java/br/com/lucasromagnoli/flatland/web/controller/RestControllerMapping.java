@@ -1,5 +1,9 @@
 package br.com.lucasromagnoli.flatland.web.controller;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 27/01/2020
+ */
 public class RestControllerMapping {
     private RestControllerMapping() {}
 

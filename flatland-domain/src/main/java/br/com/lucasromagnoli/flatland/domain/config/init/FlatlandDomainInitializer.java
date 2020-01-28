@@ -2,6 +2,10 @@ package br.com.lucasromagnoli.flatland.domain.config.init;
 
 import br.com.lucasromagnoli.flatland.domain.config.FlatlandDomainConfiguration;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 27/01/2020
+ */
 public class FlatlandDomainInitializer {
     private FlatlandDomainInitializer() {}
 

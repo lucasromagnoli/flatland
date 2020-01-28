@@ -1,5 +1,9 @@
 package br.com.lucasromagnoli.flatland.web.config;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 27/01/2020
+ */
 public class FlatlandConfigurationParameters {
     private FlatlandConfigurationParameters() {}
 

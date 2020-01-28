@@ -4,6 +4,10 @@ import br.com.lucasromagnoli.flatland.domain.config.init.FlatlandDomainInitializ
 import br.com.lucasromagnoli.flatland.web.config.FlatlandWebConfiguration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 27/01/2020
+ */
 public class FlatlandApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
