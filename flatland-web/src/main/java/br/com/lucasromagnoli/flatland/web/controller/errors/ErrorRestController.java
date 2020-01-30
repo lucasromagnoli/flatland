@@ -1,9 +1,11 @@
 package br.com.lucasromagnoli.flatland.web.controller.errors;
 
+import br.com.lucasromagnoli.flatland.domain.support.FlatlandPropertiesSupport;
 import br.com.lucasromagnoli.flatland.web.controller.RestControllerMapping;
 import br.com.lucasromagnoli.javaee.underpinning.rest.model.MessageType;
 import br.com.lucasromagnoli.javaee.underpinning.rest.model.TemplateMessage;
 import br.com.lucasromagnoli.javaee.underpinning.rest.support.TemplateMessageSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,16 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(RestControllerMapping.ERROR_PATH_ROOT)
 public class ErrorRestController {
 
-    /*
-     * TODO: Após incluir as configurações e classe de support:
-     *  Atualizar as mensagens de retorno para buscarem dinamicamente do .properties.
-     */
+    @Autowired
+    FlatlandPropertiesSupport flatlandPropertiesSupport;
 
     @GetMapping(RestControllerMapping.ERROR_PATH_NOT_FOUND)
     public ResponseEntity<TemplateMessage> notFound() {
         return TemplateMessageSupport.begin()
                 .httpStatus(HttpStatus.NOT_FOUND)
-                .message("Sorry, we couldn't find that page.")
+                .message(flatlandPropertiesSupport.getProperty("flatland.web.messages.http.path.not.found"))
                 .messageType(MessageType.ERROR)
                 .build()
                 .toResponseEntity();
@@ -37,7 +37,7 @@ public class ErrorRestController {
     public ResponseEntity<TemplateMessage> methodNotAllowed() {
         return TemplateMessageSupport.begin()
                 .httpStatus(HttpStatus.METHOD_NOT_ALLOWED)
-                .message("Sorry, this method are not allowed.")
+                .message(flatlandPropertiesSupport.getProperty("flatland.web.messages.http.method.not.allowed"))
                 .messageType(MessageType.ERROR)
                 .build()
                 .toResponseEntity();
@@ -47,7 +47,7 @@ public class ErrorRestController {
     public ResponseEntity<TemplateMessage> internalServerError() {
         return TemplateMessageSupport.begin()
                 .httpStatus(HttpStatus.METHOD_NOT_ALLOWED)
-                .message("Sorry, the server has encountered an internal error and was unable to complete your request.")
+                .message(flatlandPropertiesSupport.getProperty("flatland.web.messages.http.internal.server.error"))
                 .messageType(MessageType.ERROR)
                 .build()
                 .toResponseEntity();

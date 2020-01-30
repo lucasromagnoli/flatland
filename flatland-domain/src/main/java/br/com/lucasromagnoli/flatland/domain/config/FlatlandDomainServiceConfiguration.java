@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(basePackages = {
-        FlatlandDomainConfigurationParameters.PACKAGE_VALIDATION
+        FlatlandDomainConfigurationParameters.PACKAGE_SUPPORT,
+        FlatlandDomainConfigurationParameters.PACKAGE_VALIDATION,
+        FlatlandDomainConfigurationParameters.PACKAGE_SERVICE
 })
 public class FlatlandDomainServiceConfiguration {
 }
