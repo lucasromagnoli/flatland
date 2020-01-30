@@ -1,6 +1,8 @@
 package br.com.lucasromagnoli.flatland.domain.config.init;
 
-import br.com.lucasromagnoli.flatland.domain.config.FlatlandDomainConfiguration;
+import br.com.lucasromagnoli.flatland.domain.config.FlatlandDomainJdbcConfiguration;
+import br.com.lucasromagnoli.flatland.domain.config.FlatlandDomainJpaConfiguration;
+import br.com.lucasromagnoli.flatland.domain.config.FlatlandDomainServiceConfiguration;
 
 /**
  * @author github.com/lucasromagnoli
@@ -11,7 +13,9 @@ public class FlatlandDomainInitializer {
 
     public static Class<?>[] getRootConfigClasses() {
         return new Class[] {
-                FlatlandDomainConfiguration.class
+                FlatlandDomainServiceConfiguration.class,
+                FlatlandDomainJpaConfiguration.class,
+                FlatlandDomainJdbcConfiguration.class
         };
     }
 }
