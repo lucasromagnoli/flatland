@@ -6,6 +6,8 @@ import br.com.lucasromagnoli.javaee.underpinning.commons.exception.UnderpinningV
 import br.com.lucasromagnoli.javaee.underpinning.rest.model.MessageType;
 import br.com.lucasromagnoli.javaee.underpinning.rest.model.TemplateMessage;
 import br.com.lucasromagnoli.javaee.underpinning.rest.support.TemplateMessageSupport;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,8 +20,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ErrorHandlerRestController {
 
+    private static final Logger logger = LogManager.getLogger(ErrorHandlerRestController.class);
+
     @ExceptionHandler(UnderpinningBadRequestException.class)
     public ResponseEntity<TemplateMessage> handleBadRequestException(UnderpinningBadRequestException ex) {
+        logger.info(ex.getMessage());
         return TemplateMessageSupport.begin()
                 .httpStatus(HttpStatus.BAD_REQUEST)
                 .messageType(MessageType.ERROR)
@@ -30,6 +35,7 @@ public class ErrorHandlerRestController {
 
     @ExceptionHandler(UnderpinningInternalServerErrorException.class)
     public ResponseEntity<TemplateMessage> handleInternalServerErrorException(UnderpinningInternalServerErrorException ex) {
+        logger.error(ex.getMessage());
         return TemplateMessageSupport.begin()
                 .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                 .messageType(MessageType.ERROR)
@@ -40,6 +46,7 @@ public class ErrorHandlerRestController {
 
     @ExceptionHandler(UnderpinningValidationException.class)
     public ResponseEntity<TemplateMessage> handleValidationException(UnderpinningValidationException ex){
+        logger.info(ex.getMessage());
         return TemplateMessageSupport.begin()
                 .httpStatus(HttpStatus.BAD_REQUEST)
                 .messageType(MessageType.WARNING)
