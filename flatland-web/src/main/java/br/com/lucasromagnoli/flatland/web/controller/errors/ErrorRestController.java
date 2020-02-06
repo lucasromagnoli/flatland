@@ -46,7 +46,7 @@ public class ErrorRestController {
     @GetMapping(RestControllerMapping.ERROR_PATH_INTERNAL_SERVER_ERROR)
     public ResponseEntity<TemplateMessage> internalServerError() {
         return TemplateMessageSupport.begin()
-                .httpStatus(HttpStatus.METHOD_NOT_ALLOWED)
+                .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                 .message(flatlandPropertiesSupport.getProperty("flatland.web.messages.http.internal.server.error"))
                 .messageType(MessageType.ERROR)
                 .build()
