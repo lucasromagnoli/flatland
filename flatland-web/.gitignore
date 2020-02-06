@@ -1,2 +1,5 @@
 #Ignore project build
 /target/
+
+#Ignore public and private keys
+*.key
