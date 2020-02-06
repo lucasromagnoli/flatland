@@ -1,5 +1,6 @@
 package br.com.lucasromagnoli.flatland.domain.config;
 
+import br.com.lucasromagnoli.javaee.underpinning.domain.config.UnderpinningDomainConfigurationParameters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -48,7 +49,10 @@ public class FlatlandDomainJpaConfiguration {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setDataSource(dataSource);
         factory.setJpaVendorAdapter(jpaVendorAdapter);
-        factory.setPackagesToScan(FlatlandDomainConfigurationParameters.PACKAGE_MODEL);
+        factory.setPackagesToScan(
+                FlatlandDomainConfigurationParameters.PACKAGE_MODEL,
+                UnderpinningDomainConfigurationParameters.PACKAGE_MODEL
+        );
         factory.afterPropertiesSet();
         return factory.getObject();
     }
