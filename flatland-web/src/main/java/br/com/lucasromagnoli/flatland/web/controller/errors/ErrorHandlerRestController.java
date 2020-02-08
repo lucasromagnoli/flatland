@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -21,6 +22,20 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ErrorHandlerRestController {
 
     private static final Logger logger = LogManager.getLogger(ErrorHandlerRestController.class);
+
+
+    // TODO: 05/02/2020  Elaborar e implementar um handle generico para todas as exceptions do Underpinning
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<TemplateMessage> handleUsernameNotFoundException(UsernameNotFoundException ex) {
+        logger.info(ex.getMessage());
+        return TemplateMessageSupport.begin()
+                .httpStatus(HttpStatus.UNAUTHORIZED)
+                .messageType(MessageType.WARNING)
+                .message(ex.getMessage())
+                .build()
+                .toResponseEntity();
+    }
 
     @ExceptionHandler(UnderpinningBadRequestException.class)
     public ResponseEntity<TemplateMessage> handleBadRequestException(UnderpinningBadRequestException ex) {
