@@ -34,4 +34,4 @@ Nós utilizamos o padrão [SemVer](http://semver.org/) para o versionamento. Par
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT - veja mais detalhes em [LICENSE.md](LICENSE.md)
+Este projeto está licenciado sob a licença MIT - veja mais detalhes em [LICENSE.md](https://github.com/lucasromagnoli/flatland/blob/master/LICENSE)
