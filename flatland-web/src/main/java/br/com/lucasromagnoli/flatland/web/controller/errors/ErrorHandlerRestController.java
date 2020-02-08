@@ -1,5 +1,6 @@
 package br.com.lucasromagnoli.flatland.web.controller.errors;
 
+import br.com.lucasromagnoli.javaee.underpinning.commons.exception.UnderpinningAuthenticationFail;
 import br.com.lucasromagnoli.javaee.underpinning.commons.exception.UnderpinningBadRequestException;
 import br.com.lucasromagnoli.javaee.underpinning.commons.exception.UnderpinningInternalServerErrorException;
 import br.com.lucasromagnoli.javaee.underpinning.commons.exception.UnderpinningValidationException;
@@ -26,8 +27,8 @@ public class ErrorHandlerRestController {
 
     // TODO: 05/02/2020  Elaborar e implementar um handle generico para todas as exceptions do Underpinning
 
-    @ExceptionHandler(UsernameNotFoundException.class)
-    public ResponseEntity<TemplateMessage> handleUsernameNotFoundException(UsernameNotFoundException ex) {
+    @ExceptionHandler(UnderpinningAuthenticationFail.class)
+    public ResponseEntity<TemplateMessage> handleUsernameNotFoundException(UnderpinningAuthenticationFail ex) {
         logger.info(ex.getMessage());
         return TemplateMessageSupport.begin()
                 .httpStatus(HttpStatus.UNAUTHORIZED)
