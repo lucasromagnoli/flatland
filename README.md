@@ -1,0 +1,37 @@
+# Flatland
+
+Projeto desenvolvido para servir como ponto de partida para projetos futuros.
+
+## Começando
+
+Essas instruções vão te ajudar a ter uma copia do projeto rodando em sua maquina local para desenvolvimento.
+
+### Configurando e instalando
+
+1. Configurar o [context.xml](https://github.com/lucasromagnoli/flatland/blob/master/flatland-web/src/main/webapp/WEB-INF/web.xml) com os dados da conexão ao banco de dados.
+1. Gerar a chave pública e privada responsável por assinar o token JWT. As chaves podem ser geradas pelo software [key-generator-tool](https://github.com/lucasromagnoli/key-generator/releases/tag/V1.0.0)
+1. Inserir as chaves em `/br/com/lucasromagnoli/flatland/keys/`
+1. Compilar o projeto base [Underpinning](https://github.com/lucasromagnoli/underpinning) e inserir suas [tabelas básicas](https://github.com/lucasromagnoli/underpinning/blob/master/underpinning-web/src/main/resources/sql/underpinning.sql)
+
+
+## Exemplos
+```
+1. Exemplo - Autenticação
+```
+![demonstração-1](https://i.ibb.co/9rGTL79/demo1.png)
+
+## Compilado com
+
+* [Maven](https://maven.apache.org/) - Gerenciamento de Dependências
+
+## Versionamento
+
+Nós utilizamos o padrão [SemVer](http://semver.org/) para o versionamento. Para verificar as versões disponiveis, veja em [tags](https://github.com/lucasromagnoli/flatland/tags)
+
+## Autores
+
+* **Lucas Ramos Romagnoli** - [lucasromagnoli](https://github.com/lucasromagnoli)
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT - veja mais detalhes em [LICENSE.md](LICENSE.md)
