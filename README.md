@@ -1,6 +1,13 @@
 # Flatland
 
-Projeto desenvolvido para servir como ponto de partida para projetos futuros.
+Flatland é um archetype para projetos que seguem a arquitetura Restful. Fornecendo as funcionalidades abaixo.
+
+- Maven com profiles e projeto separado em módulos
+- Configurações do ecossistema Spring
+- Validação de input e business
+- Template de mensagem default
+- Autenticação JWT integrado com o Spring Security
+- E muito mais
 
 ## Começando
 
