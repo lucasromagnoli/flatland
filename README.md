@@ -1,6 +1,6 @@
 # Flatland
 
-Flatland é um archetype para projetos que seguem a arquitetura Restful. Fornecendo as funcionalidades abaixo.
+Flatland é um archetype para projetos que seguem a arquitetura Rest. Fornecendo as funcionalidades abaixo.
 
 - Maven com profiles e projeto separado em módulos
 - Configurações do ecossistema Spring
