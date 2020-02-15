@@ -27,14 +27,6 @@ public class UserValidation {
     FlatlandPropertiesSupport flatlandPropertiesSupport;
 
     public void validateSave(User user) throws UnderpinningException {
-        ValidatorSupport.target(user)
-                .field("username", ValidationType.OBJECT_NOT_NULL)
-                .field("username", ValidationType.STRING_BETWEEN_LENGTH, 5, 30)
-                .field("password", ValidationType.OBJECT_NOT_NULL)
-                .field("confirmPassword", ValidationType.OBJECT_NOT_NULL)
-                .validate()
-                .throwValidationException();
-
         Validation validation = ValidatorSupport.target(user)
                 .field("password", ValidationType.OBJECT_EQUALS, user.getConfirmPassword(), "confirmPassword")
                 .field("password", ValidationType.STRING_REGEX_MATCH, RegexSupport.STRONG_PASSWORD, Pattern.MULTILINE)
