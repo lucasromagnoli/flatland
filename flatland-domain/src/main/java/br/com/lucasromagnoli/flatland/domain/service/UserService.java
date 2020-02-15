@@ -6,6 +6,8 @@ import br.com.lucasromagnoli.javaee.underpinning.commons.exception.UnderpinningE
 import br.com.lucasromagnoli.javaee.underpinning.domain.model.SystemUser;
 import br.com.lucasromagnoli.javaee.underpinning.domain.repository.jpa.SystemUserJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +33,9 @@ public class UserService {
 
         userValidation.validateSave(user);
         return systemUserJpaRepository.save(systemUser);
+    }
+
+    public Page<SystemUser> list(Pageable pageable) {
+        return systemUserJpaRepository.findAll(pageable);
     }
 }
