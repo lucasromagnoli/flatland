@@ -5,6 +5,7 @@ import br.com.lucasromagnoli.javaee.underpinning.commons.exception.UnderpinningE
 import br.com.lucasromagnoli.javaee.underpinning.commons.support.RSALoaderSupport;
 import br.com.lucasromagnoli.javaee.underpinning.rest.security.jwt.JwtSecurityConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -61,6 +62,7 @@ public class FlatlandWebSecurityConfig extends JwtSecurityConfiguration {
     }
 
     @Override
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
