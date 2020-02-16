@@ -1,6 +1,6 @@
 package br.com.lucasromagnoli.flatland.domain.model;
 
-import br.com.lucasromagnoli.javaee.underpinning.domain.model.RoleSystem;
+import br.com.lucasromagnoli.javaee.underpinning.domain.model.SystemRole;
 
 import javax.persistence.*;
 
@@ -9,8 +9,8 @@ import javax.persistence.*;
  * @since 15/02/2020
  */
 @Entity
-@Table(name = "UND_SYSTEM_ROLES")
-public class Role implements RoleSystem {
+@Table(name = "FLA_SYSTEM_ROLES")
+public class Role implements SystemRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

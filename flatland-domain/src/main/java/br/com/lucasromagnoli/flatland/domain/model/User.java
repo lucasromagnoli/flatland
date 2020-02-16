@@ -1,6 +1,6 @@
 package br.com.lucasromagnoli.flatland.domain.model;
 
-import br.com.lucasromagnoli.javaee.underpinning.domain.model.UserSystem;
+import br.com.lucasromagnoli.javaee.underpinning.domain.model.SystemUser;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,8 +10,8 @@ import java.util.List;
  * @since 15/02/2020
  */
 @Entity
-@Table(name = "UND_SYSTEM_USER")
-public class User implements UserSystem {
+@Table(name = "FLA_SYSTEM_USER")
+public class User implements SystemUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class User implements UserSystem {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "UND_SYSTEM_USER_ROLES",
+            name = "FLA_SYSTEM_USER_ROLES",
             joinColumns = @JoinColumn(name = "ID_SYSTEM_USER"),
             inverseJoinColumns = @JoinColumn(name = "ID_SYSTEM_ROLES")
     )
