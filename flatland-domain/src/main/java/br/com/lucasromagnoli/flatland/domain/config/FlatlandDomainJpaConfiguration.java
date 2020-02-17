@@ -21,8 +21,9 @@ import javax.sql.DataSource;
  * @since 29/01/2020
  */
 @Configuration
-@EnableJpaRepositories
-@ComponentScan(basePackages = {FlatlandDomainConfigurationParameters.PACKAGE_REPOSITORY_JPA})
+@EnableJpaRepositories(basePackages = {
+        FlatlandDomainConfigurationParameters.PACKAGE_REPOSITORY_JPA
+})
 public class FlatlandDomainJpaConfiguration {
 
     @Bean

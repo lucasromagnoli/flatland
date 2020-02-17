@@ -1,11 +1,12 @@
 package br.com.lucasromagnoli.flatland.web.controller.auth.v1;
 
+import br.com.lucasromagnoli.flatland.domain.model.User;
+import br.com.lucasromagnoli.flatland.domain.service.UserService;
 import br.com.lucasromagnoli.flatland.domain.support.FlatlandPropertiesSupport;
 import br.com.lucasromagnoli.flatland.web.controller.RestControllerMapping;
 import br.com.lucasromagnoli.javaee.underpinning.commons.exception.UnderpinningException;
 import br.com.lucasromagnoli.javaee.underpinning.commons.support.ValidatorSupport;
 import br.com.lucasromagnoli.javaee.underpinning.commons.validation.ValidationType;
-import br.com.lucasromagnoli.javaee.underpinning.domain.model.SystemUser;
 import br.com.lucasromagnoli.javaee.underpinning.rest.model.MessageType;
 import br.com.lucasromagnoli.javaee.underpinning.rest.model.TemplateMessage;
 import br.com.lucasromagnoli.javaee.underpinning.rest.security.jwt.JwtAuthenticationService;
@@ -32,17 +33,22 @@ public class AuthRestController {
     @Autowired
     FlatlandPropertiesSupport flatlandPropertiesSupport;
 
+    @Autowired
+    UserService userService;
+
     @PostMapping(RestControllerMapping.AUTH_PATH_GENERATE_TOKEN)
-    public ResponseEntity<TemplateMessage> genereteToken(@RequestBody(required = false) SystemUser systemUser) throws UnderpinningException {
-        ValidatorSupport.target(systemUser)
+    public ResponseEntity<TemplateMessage> genereteToken(@RequestBody(required = false) User userFilled) throws UnderpinningException {
+        ValidatorSupport.target(userFilled)
                 .field("username", ValidationType.OBJECT_NOT_NULL)
                 .field("password", ValidationType.OBJECT_NOT_NULL)
-                .validate();
+                .validate()
+                .throwValidationException();
 
+        User userDatabase = userService.findByUsername(userFilled.getUsername());
         return TemplateMessageSupport.begin()
                 .messageType(MessageType.SUCCESS)
                 .message(flatlandPropertiesSupport.getProperty("flatland.web.security.jwt.user.authenticated"))
-                .payload(jwtAuthenticationService.authenticateSystemUser(systemUser))
+                .payload(jwtAuthenticationService.authenticateSystemUser(userFilled, userDatabase))
                 .httpStatus(HttpStatus.CREATED)
                 .build()
                 .toResponseEntity();
