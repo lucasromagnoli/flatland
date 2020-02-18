@@ -9,6 +9,7 @@ import br.com.lucasromagnoli.javaee.underpinning.commons.support.ValidatorSuppor
 import br.com.lucasromagnoli.javaee.underpinning.commons.validation.Validation;
 import br.com.lucasromagnoli.javaee.underpinning.commons.validation.ValidationType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;
@@ -24,16 +25,33 @@ public class UserValidation {
     UserService userService;
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
     FlatlandPropertiesSupport flatlandPropertiesSupport;
 
-    public void validateSave(User user) throws UnderpinningException {
-        Validation validation = ValidatorSupport.target(user)
+    private Validation validatePassword(User user) throws UnderpinningException {
+        return ValidatorSupport.target(user)
                 .field("password", ValidationType.OBJECT_EQUALS, user.getConfirmPassword(), "confirmPassword")
                 .field("password", ValidationType.STRING_REGEX_MATCH, RegexSupport.STRONG_PASSWORD, Pattern.MULTILINE)
                 .validate();
+    }
+
+    public void validateSave(User user) throws UnderpinningException {
+        Validation validation = validatePassword(user);
 
         if (userService.existsByUsername(user.getUsername())) {
             validation.rejectField("username", flatlandPropertiesSupport.getProperty("flatland.domain.messages.validation.user.username.alreadyUsed"));
+        }
+
+        validation.throwValidationException();
+    }
+
+    public void validateUpdate(User user) throws UnderpinningException {
+        Validation validation = validatePassword(user);
+
+        if (!passwordEncoder.matches(user.getOldPassword(), userService.findById(user.getId()).getPassword())) {
+            validation.rejectField("oldPassword", "Senha antiga não confere");
         }
 
         validation.throwValidationException();

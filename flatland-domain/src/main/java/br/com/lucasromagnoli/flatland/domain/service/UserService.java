@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 /**
  * @author github.com/lucasromagnoli
  * @since 15/02/2020
@@ -42,6 +40,13 @@ public class UserService {
     public User findById(Long id) throws UnderpinningException {
         return userJpaRepository.findById(id)
                 .orElseThrow(() -> new UnderpinningException("No user were found with this id"));
+    }
+
+    public User update(User user) throws UnderpinningException {
+        userValidation.validateUpdate(user);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userJpaRepository.save(user);
     }
 
     public Boolean existsByUsername(String username) {

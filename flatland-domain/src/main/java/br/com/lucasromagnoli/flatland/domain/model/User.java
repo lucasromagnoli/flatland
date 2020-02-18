@@ -35,6 +35,9 @@ public class User implements SystemUser {
     @Transient
     private String confirmPassword;
 
+    @Transient
+    private String oldPassword;
+
     public Long getId() {
         return id;
     }
@@ -73,5 +76,13 @@ public class User implements SystemUser {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 }

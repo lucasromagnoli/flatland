@@ -32,13 +32,13 @@ public class UsersRestController {
     FlatlandPropertiesSupport flatlandPropertiesSupport;
 
     @GetMapping
-    public ResponseEntity<TemplateMessage> index(@AuthenticationPrincipal JwtAuthenticatedUser user) throws UnderpinningException {
+    public ResponseEntity<TemplateMessage> index(@AuthenticationPrincipal JwtAuthenticatedUser authenticatedUser) throws UnderpinningException {
 
         return TemplateMessageSupport.begin()
-                .httpStatus(HttpStatus.CREATED)
+                .httpStatus(HttpStatus.OK)
                 .messageType(MessageType.SUCCESS)
                 .message(flatlandPropertiesSupport.getProperty("flatland.web.messages.user.details"))
-                .payload(userService.findById(user.getId()))
+                .payload(userService.findById(authenticatedUser.getId()))
                 .build()
                 .toResponseEntity();
     }
@@ -61,5 +61,24 @@ public class UsersRestController {
                 .payload(systemUser)
                 .build()
                 .toResponseEntity();
+    }
+
+    @PutMapping
+    public ResponseEntity<TemplateMessage> update(@RequestBody(required = false) User user, @AuthenticationPrincipal JwtAuthenticatedUser authenticatedUser) throws UnderpinningException {
+        ValidatorSupport.target(user)
+                .field("password", ValidationType.OBJECT_NOT_NULL)
+                .field("confirmPassword", ValidationType.OBJECT_NOT_NULL)
+                .field("oldPassword", ValidationType.OBJECT_NOT_NULL)
+                .validate()
+                .throwValidationException();
+
+        user.setId(authenticatedUser.getId());
+        return TemplateMessageSupport.begin()
+                        .httpStatus(HttpStatus.OK)
+                        .messageType(MessageType.SUCCESS)
+                        .message("Usuário atualizado com sucesso!")
+                        .payload(userService.update(user))
+                        .build()
+                        .toResponseEntity();
     }
 }
