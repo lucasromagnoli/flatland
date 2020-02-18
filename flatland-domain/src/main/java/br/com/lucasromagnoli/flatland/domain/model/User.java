@@ -32,6 +32,9 @@ public class User implements SystemUser {
     )
     private List<Role> roles;
 
+    @Column(name = "ACTIVE")
+    private Boolean active;
+
     @Transient
     private String confirmPassword;
 
@@ -68,6 +71,14 @@ public class User implements SystemUser {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public String getConfirmPassword() {
