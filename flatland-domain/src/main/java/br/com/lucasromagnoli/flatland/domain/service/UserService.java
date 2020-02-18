@@ -25,9 +25,12 @@ public class UserService {
     PasswordEncoder passwordEncoder;
 
     // TODO: 15/02/2020 - Atualizar a mensagem da exception para .properties
-    public User findByUsername(String username) throws UnderpinningAuthenticationFail {
-        return userJpaRepository.findByUsernameIgnoreCase(username)
+    public User findByUsername(String username) throws UnderpinningException {
+        User user = userJpaRepository.findByUsernameIgnoreCase(username)
                 .orElseThrow(() -> new UnderpinningAuthenticationFail("No users were found with this username"));
+
+        userValidation.validateActiveUser(user);
+        return user;
     }
 
     public User save(User user) throws UnderpinningException {
@@ -49,7 +52,15 @@ public class UserService {
         return userJpaRepository.save(user);
     }
 
+    public void delete(Long id) throws UnderpinningException {
+        User user = findById(id);
+        user.setActive(false);
+
+        userJpaRepository.save(user);
+    }
+
     public Boolean existsByUsername(String username) {
         return userJpaRepository.existsByUsernameIgnoreCase(username);
     }
+
 }

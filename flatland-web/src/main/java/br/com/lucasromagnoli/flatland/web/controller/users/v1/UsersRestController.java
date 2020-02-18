@@ -81,4 +81,15 @@ public class UsersRestController {
                         .build()
                         .toResponseEntity();
     }
+
+    @DeleteMapping
+    public ResponseEntity<TemplateMessage> delete(@AuthenticationPrincipal JwtAuthenticatedUser authenticatedUser) throws UnderpinningException {
+        userService.delete(authenticatedUser.getId());
+        return TemplateMessageSupport.begin()
+                        .httpStatus(HttpStatus.OK)
+                        .messageType(MessageType.SUCCESS)
+                        .message("Usuário excluido com sucesso")
+                        .build()
+                        .toResponseEntity();
+    }
 }

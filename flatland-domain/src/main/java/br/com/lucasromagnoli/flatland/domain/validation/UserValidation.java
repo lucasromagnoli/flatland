@@ -4,7 +4,9 @@ import br.com.lucasromagnoli.flatland.domain.model.User;
 import br.com.lucasromagnoli.flatland.domain.service.UserService;
 import br.com.lucasromagnoli.flatland.domain.support.FlatlandPropertiesSupport;
 import br.com.lucasromagnoli.javaee.underpinning.commons.exception.UnderpinningException;
+import br.com.lucasromagnoli.javaee.underpinning.commons.exception.UnderpinningValidationException;
 import br.com.lucasromagnoli.javaee.underpinning.commons.support.RegexSupport;
+import br.com.lucasromagnoli.javaee.underpinning.commons.support.ValidationSupport;
 import br.com.lucasromagnoli.javaee.underpinning.commons.support.ValidatorSupport;
 import br.com.lucasromagnoli.javaee.underpinning.commons.validation.Validation;
 import br.com.lucasromagnoli.javaee.underpinning.commons.validation.ValidationType;
@@ -47,6 +49,7 @@ public class UserValidation {
         validation.throwValidationException();
     }
 
+    // TODO: 17/02/2020 - Atualizar a mensagem da exception para .properties
     public void validateUpdate(User user) throws UnderpinningException {
         Validation validation = validatePassword(user);
 
@@ -56,4 +59,15 @@ public class UserValidation {
 
         validation.throwValidationException();
     }
+
+    // TODO: 17/02/2020 - Atualizar a mensagem da exception para .properties 
+    public void validateActiveUser(User user) throws UnderpinningException {
+        if (!user.isActive()) {
+            ValidationSupport.begin()
+                    .details("active", "Este usuário não está ativo")
+                    .build()
+                    .throwValidationException();
+        }
+    }
+
 }
