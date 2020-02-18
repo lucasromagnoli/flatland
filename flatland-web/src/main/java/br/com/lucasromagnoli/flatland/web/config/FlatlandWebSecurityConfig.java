@@ -31,7 +31,7 @@ public class FlatlandWebSecurityConfig extends JwtSecurityConfiguration {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers("/error/**")
-                .antMatchers("/v1/**");
+                .antMatchers("/v1/auth/**");
     }
 
     @Override

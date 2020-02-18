@@ -10,13 +10,12 @@ import br.com.lucasromagnoli.javaee.underpinning.commons.validation.ValidationTy
 import br.com.lucasromagnoli.javaee.underpinning.domain.model.SystemUser;
 import br.com.lucasromagnoli.javaee.underpinning.rest.model.MessageType;
 import br.com.lucasromagnoli.javaee.underpinning.rest.model.TemplateMessage;
+import br.com.lucasromagnoli.javaee.underpinning.rest.security.jwt.JwtAuthenticatedUser;
 import br.com.lucasromagnoli.javaee.underpinning.rest.support.TemplateMessageSupport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -33,14 +32,13 @@ public class UsersRestController {
     FlatlandPropertiesSupport flatlandPropertiesSupport;
 
     @GetMapping
-    public ResponseEntity<TemplateMessage> list(@PageableDefault Pageable pageable) {
-        Page<SystemUser> pageSystemUser = userService.list(pageable);
+    public ResponseEntity<TemplateMessage> index(@AuthenticationPrincipal JwtAuthenticatedUser user) throws UnderpinningException {
 
         return TemplateMessageSupport.begin()
-                .httpStatus(HttpStatus.OK)
+                .httpStatus(HttpStatus.CREATED)
                 .messageType(MessageType.SUCCESS)
-                .message("List of users")
-                .payload(pageSystemUser)
+                .message(flatlandPropertiesSupport.getProperty("flatland.web.messages.user.details"))
+                .payload(userService.findById(user.getId()))
                 .build()
                 .toResponseEntity();
     }

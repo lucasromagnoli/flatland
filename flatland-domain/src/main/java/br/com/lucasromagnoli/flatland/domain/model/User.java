@@ -32,6 +32,9 @@ public class User implements SystemUser {
     )
     private List<Role> roles;
 
+    @Transient
+    private String confirmPassword;
+
     public Long getId() {
         return id;
     }
@@ -62,5 +65,13 @@ public class User implements SystemUser {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }
