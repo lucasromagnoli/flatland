@@ -15,7 +15,7 @@ Essas instruções vão te ajudar a ter uma copia do projeto rodando em sua maqu
 
 ### Configurando e instalando
 
-1. Configurar o [context.xml](https://github.com/lucasromagnoli/flatland/blob/master/flatland-web/src/main/webapp/WEB-INF/web.xml) com os dados da conexão ao banco de dados.
+1. Configurar o [context.xml](https://github.com/lucasromagnoli/flatland/blob/master/flatland-web/src/main/webapp/META-INF/context.xml) com os dados da conexão ao banco de dados.
 1. Gerar a chave pública e privada responsável por assinar o token JWT. As chaves podem ser geradas pelo software [key-generator-tool](https://github.com/lucasromagnoli/key-generator/releases/tag/V1.0.0)
 1. Inserir as chaves em `/br/com/lucasromagnoli/flatland/keys/`
 1. Compilar o projeto base [Underpinning](https://github.com/lucasromagnoli/underpinning)
